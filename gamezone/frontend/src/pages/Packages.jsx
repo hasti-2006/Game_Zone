@@ -183,7 +183,7 @@ const AssignModal = ({ packages, onClose, onSuccess }) => {
               <div>
                 <p className="text-sm font-medium text-textMain mb-2">Payment Method</p>
                 <div className="flex gap-2">
-                  {['cash', 'upi', 'wallet'].map((m) => (
+                  {['cash', 'upi'].map((m) => (
                     <button
                       key={m}
                       onClick={() => setPaymentMethod(m)}
