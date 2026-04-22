@@ -41,7 +41,7 @@ const seedAdmin = async () => {
       name: 'Admin',
       email,
       password_hash: bcrypt.hashSync(password, 10),
-      role: 'admin',
+      role: 'super_admin',
       is_active: true,
     });
     console.log(`✅ Admin created: ${email}`);
