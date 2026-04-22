@@ -1,23 +1,39 @@
+import { LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 const Topbar = ({ title, children }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
-    <header className="topbar bg-card border-b border-border flex items-center justify-between gap-3 px-4 md:px-6">
-      {/* Mobile: title is absolutely centered. Desktop: normal left-aligned flow */}
-      <h2 className="
-        absolute left-1/2 -translate-x-1/2
-        text-base font-semibold text-textMain truncate max-w-[55%]
-        md:static md:left-auto md:translate-x-0 md:text-xl md:max-w-none
-      ">
+    <header className="topbar bg-card border-b border-border flex items-center gap-3 px-4 md:px-6">
+      {/* Title — left-aligned on both mobile and desktop */}
+      <h2 className="flex-1 text-base md:text-xl font-semibold text-textMain truncate">
         {title}
       </h2>
 
-      {/* Invisible spacer pushes children to the right on mobile */}
-      <div className="flex-1 md:hidden" />
-
+      {/* Page-specific action buttons (passed as children) */}
       {children && (
         <div className="flex items-center gap-2 flex-shrink-0">
           {children}
         </div>
       )}
+
+      {/* Logout — visible on mobile only (desktop uses sidebar logout) */}
+      <button
+        onClick={handleLogout}
+        className="md:hidden flex items-center justify-center p-2 text-textMuted hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors min-w-[44px] min-h-[44px]"
+        aria-label="Logout"
+        title="Logout"
+      >
+        <LogOut size={18} />
+      </button>
     </header>
   );
 };

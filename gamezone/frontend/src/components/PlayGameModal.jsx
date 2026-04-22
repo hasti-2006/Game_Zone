@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const PlayGameModal = ({ onClose, onSessionCreated, preSelectedSystem }) => {
   const [step, setStep] = useState(1);
-  const [userType, setUserType] = useState('guest'); // 'regular' | 'guest'
+  const [userType, setUserType] = useState('guest'); 
 
   // Regular user state
   const [mobile, setMobile] = useState('');
@@ -18,7 +18,7 @@ const PlayGameModal = ({ onClose, onSessionCreated, preSelectedSystem }) => {
   const [guestName, setGuestName] = useState('');
   const [guestId, setGuestId] = useState(null);
 
-  // Step 2
+
   const [systems, setSystems] = useState([]);
   const [selectedSystem, setSelectedSystem] = useState(preSelectedSystem || null);
   const [remotesCount, setRemotesCount] = useState(0);
@@ -64,7 +64,7 @@ const PlayGameModal = ({ onClose, onSessionCreated, preSelectedSystem }) => {
         }
       }
     } else {
-      // Regular user — find or auto-create by mobile + name
+    
       if (!mobile) return toast.error('Enter mobile number');
       if (!regName.trim() && !foundUser) return toast.error('Enter user name');
       try {
@@ -132,7 +132,7 @@ const PlayGameModal = ({ onClose, onSessionCreated, preSelectedSystem }) => {
         </div>
 
         <div className="px-6 py-5">
-          {/* Step 1 */}
+      
           {step === 1 && (
             <div className="space-y-4">
               <p className="text-sm font-medium text-textMain">Select User Type</p>
@@ -219,7 +219,7 @@ const PlayGameModal = ({ onClose, onSessionCreated, preSelectedSystem }) => {
             </div>
           )}
 
-          {/* Step 2 */}
+       
           {step === 2 && (
             <div className="space-y-4">
               <p className="text-sm font-medium text-textMain">Select System</p>
