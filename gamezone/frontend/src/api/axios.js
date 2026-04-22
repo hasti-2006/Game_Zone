@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL:"https://game-zone-lmi6.onrender.com/api",
 });
 
 // Attach JWT token to every request
