@@ -26,10 +26,26 @@ body {
     width: 100%;
   }
 
-  /* Full-width main content (sidebar is hidden/overlay on mobile) */
+  /* Full-width main content */
   main {
     width: 100% !important;
     min-width: 0;
+  }
+
+  /* Topbar: fixed at top, full width, 56px tall */
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 50;
+  }
+
+  /* Main content: pad top for fixed topbar, pad bottom for fixed bottom nav */
+  .app-main {
+    padding-top: 56px;
+    padding-bottom: 60px;
   }
 
   /* Comfortable page padding on mobile */

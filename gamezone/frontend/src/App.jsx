@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet, NavLink } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { SessionProvider } from './context/SessionContext';
 import PrivateRoute from './components/PrivateRoute';
-import Sidebar from './components/Sidebar';
+import Sidebar, { navItems } from './components/Sidebar';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -16,15 +16,43 @@ import Packages from './pages/Packages';
 import Bookings from './pages/Bookings';
 import UsersPage from './pages/Users';
 
+// Bottom nav items — 6 items that fit on mobile (Session History is too long, use History label)
+const bottomNavItems = navItems.filter((item) =>
+  ['/', '/dashboard', '/users', '/beverages', '/systems', '/bookings', '/packages'].includes(item.to)
+);
+
 // Layout wrapper for authenticated pages
 const AppLayout = () => (
   <div className="flex h-screen overflow-hidden bg-background">
+    {/* Desktop sidebar — hidden on mobile via its own className */}
     <Sidebar />
-    {/* On mobile the sidebar is fixed/overlay, so main takes full width.
-        On md+ the sidebar is sticky so flex-1 naturally fills the rest. */}
-    <main className="flex-1 flex flex-col overflow-y-auto w-full md:w-auto">
+
+    {/* Main content area */}
+    <main className="app-main flex-1 flex flex-col overflow-y-auto w-full md:w-auto">
       <Outlet />
     </main>
+
+    {/* ── Bottom nav — mobile only ── */}
+    <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-card border-t border-border flex items-stretch" style={{ height: '60px' }}>
+      {bottomNavItems.map(({ label, icon: Icon, to }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) =>
+            `flex-1 flex flex-col items-center justify-center gap-0.5 transition-colors ${
+              isActive ? 'text-primary' : 'text-textMuted'
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.8} />
+              <span className="text-[10px] font-medium leading-none">{label}</span>
+            </>
+          )}
+        </NavLink>
+      ))}
+    </nav>
   </div>
 );
 
