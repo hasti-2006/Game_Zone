@@ -147,66 +147,89 @@ const BookingsBell = ({ bookings }) => {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="relative p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors"
+        className="relative p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
         title="Today's bookings"
       >
         <Bell size={18} />
         {bookings.length > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+          <span className="absolute top-1 right-1 w-4 h-4 bg-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
             {bookings.length > 9 ? '9+' : bookings.length}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-72 bg-card border border-border rounded-2xl shadow-xl z-50 overflow-hidden">
-          <div className="px-4 py-3 border-b border-border flex items-center gap-2">
-            <CalendarDays size={15} className="text-accent" />
-            <p className="text-sm font-semibold text-textMain">Today's Bookings</p>
-            <span className="ml-auto text-xs text-textMuted">{bookings.length} total</span>
+        <>
+          {/* Mobile: full-width panel fixed below topbar */}
+          <div className="md:hidden fixed left-0 right-0 top-14 z-50 mx-3 bg-card border border-border rounded-2xl shadow-xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-border flex items-center gap-2">
+              <CalendarDays size={15} className="text-accent" />
+              <p className="text-sm font-semibold text-textMain">Today's Bookings</p>
+              <span className="ml-auto text-xs text-textMuted">{bookings.length} total</span>
+            </div>
+            {bookings.length === 0 ? (
+              <p className="text-xs text-textMuted text-center py-6">No bookings today</p>
+            ) : (
+              <ul className="max-h-[60vh] overflow-y-auto divide-y divide-border">
+                {bookings.map((b) => (
+                  <li key={b._id} className="px-4 py-3">
+                    <div className="flex items-center justify-between mb-1 gap-2">
+                      <p className="text-sm font-medium text-textMain truncate">{b.systemId?.name || '—'}</p>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize shrink-0 ${
+                        b.status === 'active' ? 'bg-green-100 text-green-700'
+                        : b.status === 'cancelled' ? 'bg-red-100 text-red-600'
+                        : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        {b.status}
+                      </span>
+                    </div>
+                    <p className="text-xs text-textMuted">{b.userId?.name || 'Unknown'}</p>
+                    <p className="text-xs text-textMuted mt-0.5">
+                      {new Date(b.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {' → '}
+                      {new Date(b.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          {bookings.length === 0 ? (
-            <p className="text-xs text-textMuted text-center py-6">No bookings today</p>
-          ) : (
-            <ul className="max-h-72 overflow-y-auto divide-y divide-border">
-              {bookings.map((b) => (
-                <li key={b._id} className="px-4 py-3 hover:bg-background transition-colors">
-                  <div className="flex items-center justify-between mb-0.5">
-                    <p className="text-sm font-medium text-textMain">
-                      {b.systemId?.name || '—'}
+          {/* Desktop: normal dropdown */}
+          <div className="hidden md:block absolute right-0 top-full mt-2 w-72 bg-card border border-border rounded-2xl shadow-xl z-50 overflow-hidden">
+            <div className="px-4 py-3 border-b border-border flex items-center gap-2">
+              <CalendarDays size={15} className="text-accent" />
+              <p className="text-sm font-semibold text-textMain">Today's Bookings</p>
+              <span className="ml-auto text-xs text-textMuted">{bookings.length} total</span>
+            </div>
+            {bookings.length === 0 ? (
+              <p className="text-xs text-textMuted text-center py-6">No bookings today</p>
+            ) : (
+              <ul className="max-h-72 overflow-y-auto divide-y divide-border">
+                {bookings.map((b) => (
+                  <li key={b._id} className="px-4 py-3 hover:bg-background transition-colors">
+                    <div className="flex items-center justify-between mb-0.5">
+                      <p className="text-sm font-medium text-textMain">{b.systemId?.name || '—'}</p>
+                      <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium capitalize ${
+                        b.status === 'active' ? 'bg-green-100 text-green-700'
+                        : b.status === 'cancelled' ? 'bg-red-100 text-red-600'
+                        : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        {b.status}
+                      </span>
+                    </div>
+                    <p className="text-xs text-textMuted">{b.userId?.name || 'Unknown'}</p>
+                    <p className="text-xs text-textMuted mt-0.5">
+                      {new Date(b.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {' → '}
+                      {new Date(b.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
-                    <span
-                      className={`text-xs px-1.5 py-0.5 rounded-full font-medium capitalize ${
-                        b.status === 'active'
-                          ? 'bg-green-100 text-green-700'
-                          : b.status === 'cancelled'
-                          ? 'bg-red-100 text-red-600'
-                          : 'bg-gray-100 text-gray-500'
-                      }`}
-                    >
-                      {b.status}
-                    </span>
-                  </div>
-                  <p className="text-xs text-textMuted">
-                    {b.userId?.name || 'Unknown'}
-                  </p>
-                  <p className="text-xs text-textMuted mt-0.5">
-                    {new Date(b.startTime).toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                    {' → '}
-                    {new Date(b.endTime).toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </>
       )}
     </div>
   );
