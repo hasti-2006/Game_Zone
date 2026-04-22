@@ -1,0 +1,81 @@
+import { NavLink, useNavigate } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  Coffee,
+  Monitor,
+  CalendarDays,
+  History,
+  Package,
+  Users,
+  LogOut,
+} from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+
+const navItems = [
+  { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
+  { label: 'Users', icon: Users, to: '/users' },
+  { label: 'Beverages', icon: Coffee, to: '/beverages' },
+  { label: 'Systems', icon: Monitor, to: '/systems' },
+  { label: 'Bookings', icon: CalendarDays, to: '/bookings' },
+  { label: 'Session History', icon: History, to: '/history' },
+  { label: 'Packages', icon: Package, to: '/packages' },
+];
+
+const Sidebar = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  return (
+    <aside className="w-64 min-h-screen bg-primary flex flex-col shrink-0">
+      {/* Logo */}
+      <div className="px-6 py-6 border-b border-white/10">
+        <h1 className="text-white text-2xl font-bold tracking-tight">GameZone</h1>
+        <p className="text-white/50 text-xs mt-0.5">Admin Panel</p>
+      </div>
+
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
+        {navItems.map(({ label, icon: Icon, to }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                isActive
+                  ? 'bg-white/20 text-white'
+                  : 'text-white/75 hover:bg-white/10 hover:text-white'
+              }`
+            }
+          >
+            <Icon size={18} />
+            {label}
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Admin info + logout */}
+      <div className="px-4 py-4 border-t border-white/10">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="min-w-0">
+            <p className="text-white text-sm font-medium truncate">Admin</p>
+            <p className="text-white/50 text-xs">admin</p>
+          </div>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 text-white/70 hover:text-white text-sm w-full px-2 py-1.5 rounded hover:bg-white/10 transition-colors"
+        >
+          <LogOut size={16} />
+          Logout
+        </button>
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;
