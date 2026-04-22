@@ -37,26 +37,26 @@ const ActiveCard = ({ system, onNavigate, isBookedToday }) => {
   return (
     <div
       onClick={() => onNavigate(system.sessionId)}
-      className="bg-card rounded-2xl border-l-4 border-l-green-500 border border-border shadow-sm p-5 cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all group"
+      className="bg-card rounded-2xl border-l-4 border-l-green-500 border border-border shadow-sm p-4 md:p-5 cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all group"
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center">
+      <div className="flex items-start justify-between mb-4 gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
             <Monitor size={18} className="text-green-600" />
           </div>
-          <div>
-            <p className="font-semibold text-textMain text-sm">{system.name}</p>
+          <div className="min-w-0">
+            <p className="font-semibold text-textMain text-sm truncate">{system.name}</p>
             <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded font-medium">
               {system.type}
             </span>
           </div>
         </div>
-        <div className="flex flex-col items-end gap-1">
-          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
+        <div className="flex flex-col items-end gap-1 shrink-0">
+          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
             Active
           </span>
           {isBookedToday && (
-            <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
               Booked
             </span>
           )}
@@ -93,27 +93,27 @@ const ActiveCard = ({ system, onNavigate, isBookedToday }) => {
 const IdleCard = ({ system, onPlayGame, isBookedToday }) => (
   <div
     onClick={() => onPlayGame(system)}
-    className="bg-card rounded-2xl border-l-4 border-l-gray-200 border border-border shadow-sm p-5 cursor-pointer hover:shadow-md hover:-translate-y-0.5 hover:border-l-primary transition-all group"
+    className="bg-card rounded-2xl border-l-4 border-l-gray-200 border border-border shadow-sm p-4 md:p-5 cursor-pointer hover:shadow-md hover:-translate-y-0.5 hover:border-l-primary transition-all group"
   >
-    <div className="flex items-start justify-between mb-4">
-      <div className="flex items-center gap-2">
-        <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center">
+    <div className="flex items-start justify-between mb-4 gap-2">
+      <div className="flex items-center gap-2 min-w-0">
+        <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center shrink-0">
           <Monitor size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
         </div>
-        <div>
-          <p className="font-semibold text-textMain text-sm">{system.name}</p>
+        <div className="min-w-0">
+          <p className="font-semibold text-textMain text-sm truncate">{system.name}</p>
           <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-medium">
             {system.type}
           </span>
         </div>
       </div>
-      <div className="flex flex-col items-end gap-1">
+      <div className="shrink-0">
         {isBookedToday ? (
-          <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">
+          <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
             Booked
           </span>
         ) : (
-          <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
+          <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
             Available
           </span>
         )}
@@ -284,7 +284,7 @@ const Dashboard = () => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <Topbar title="Dashboard">
-        <div className="flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-2">
           <span className="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-xs font-medium">
             {activeSystems.length} Active
           </span>
@@ -298,20 +298,21 @@ const Dashboard = () => {
 
         <button
           onClick={handleRefresh}
-          className="p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors"
+          className="p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
           title="Refresh"
         >
           <RefreshCw size={16} />
         </button>
         <button
           onClick={() => handlePlayGame()}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors font-medium"
+          className="flex items-center gap-2 px-3 md:px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors font-medium min-h-[44px]"
         >
-          <Plus size={16} /> Play Game
+          <Plus size={16} />
+          <span className="hidden sm:inline">Play Game</span>
         </button>
       </Topbar>
 
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-4 md:p-6 overflow-y-auto">
         {loading ? (
           <div className="flex items-center justify-center h-48">
             <div className="flex flex-col items-center gap-3">
@@ -337,21 +338,23 @@ const Dashboard = () => {
           </div>
         ) : (
           <div>
-            {/* Filter tabs */}
-            <div className="flex items-center gap-1 mb-4 bg-background rounded-xl p-1 w-fit">
-              {TABS.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setFilterType(tab)}
-                  className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    filterType === tab
-                      ? 'bg-primary text-white shadow-sm'
-                      : 'text-textMuted hover:text-textMain'
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+            {/* Filter tabs — horizontally scrollable on mobile */}
+            <div className="overflow-x-auto pb-1 mb-4 -mx-4 px-4 md:mx-0 md:px-0">
+              <div className="flex items-center gap-1 bg-background rounded-xl p-1 w-max">
+                {TABS.map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setFilterType(tab)}
+                    className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap min-h-[44px] ${
+                      filterType === tab
+                        ? 'bg-primary text-white shadow-sm'
+                        : 'text-textMuted hover:text-textMain'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="flex items-center gap-3 mb-4">
