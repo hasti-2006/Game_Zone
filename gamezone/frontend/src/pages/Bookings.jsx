@@ -82,7 +82,7 @@ const BookingModal = ({ onClose, onSave }) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
+        <form onSubmit={handleSubmit} className="px-4 sm:px-6 py-5 space-y-4">
           <div>
             <label className="block text-sm font-medium text-textMain mb-1.5">User Name</label>
             <input
@@ -123,8 +123,8 @@ const BookingModal = ({ onClose, onSave }) => {
             </select>
           </div>
 
-          {/* Date + Time — stack on very small screens */}
-          <div className="grid grid-cols-2 gap-3">
+          {/* Date + Time — stacked on mobile, side by side on sm+ */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-textMain mb-1.5">Date</label>
               <input
