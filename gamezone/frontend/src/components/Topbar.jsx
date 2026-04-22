@@ -12,7 +12,7 @@ const Topbar = ({ title, children }) => {
   };
 
   return (
-    <header className="topbar bg-card border-b border-border flex items-center gap-3 px-4 md:px-6">
+    <header className="topbar bg-card border-b border-border flex items-center gap-3 px-4 md:px-6 md:py-4">
       {/* Title — left-aligned on both mobile and desktop */}
       <h2 className="flex-1 text-base md:text-xl font-semibold text-textMain truncate">
         {title}

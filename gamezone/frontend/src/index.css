@@ -32,7 +32,7 @@ body {
     min-width: 0;
   }
 
-  /* Topbar: fixed at top, full width, 56px tall */
+  /* Topbar: fixed at top, full width, 56px tall — mobile only */
   .topbar {
     position: fixed;
     top: 0;
@@ -53,10 +53,10 @@ body {
     padding: 16px;
   }
 
-  /* Minimum touch target for all interactive elements */
-  button, a, [role="button"] {
+  /* Minimum touch target for interactive elements — exclude form/modal buttons */
+  button:not(.modal-btn):not([type="button"]):not([type="submit"]):not([type="reset"]),
+  a[role="button"] {
     min-height: 44px;
-    min-width: 44px;
   }
 }
 

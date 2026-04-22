@@ -73,18 +73,18 @@ const BookingModal = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3">
       <div className="bg-card rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border sticky top-0 bg-card">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border sticky top-0 bg-card">
           <h3 className="font-semibold text-textMain">New Booking</h3>
-          <button onClick={onClose} className="p-1.5 text-textMuted hover:text-textMain hover:bg-background rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center">
+          <button onClick={onClose} className="p-1.5 text-textMuted hover:text-textMain hover:bg-background rounded-lg">
             <X size={18} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="px-4 sm:px-6 py-5 space-y-4">
+        <form onSubmit={handleSubmit} className="px-4 py-4 space-y-3">
           <div>
-            <label className="block text-sm font-medium text-textMain mb-1.5">User Name</label>
+            <label className="block text-xs font-medium text-textMuted mb-1">User Name</label>
             <input
               type="text"
               value={userName}
@@ -95,7 +95,7 @@ const BookingModal = ({ onClose, onSave }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-textMain mb-1.5">Mobile Number</label>
+            <label className="block text-xs font-medium text-textMuted mb-1">Mobile Number</label>
             <input
               type="text"
               inputMode="numeric"
@@ -108,7 +108,7 @@ const BookingModal = ({ onClose, onSave }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-textMain mb-1.5">System</label>
+            <label className="block text-xs font-medium text-textMuted mb-1">System</label>
             <select
               value={systemId}
               onChange={(e) => { setSystemId(e.target.value); setAvailability(null); }}
@@ -123,37 +123,37 @@ const BookingModal = ({ onClose, onSave }) => {
             </select>
           </div>
 
-          {/* Date + Time — stacked on mobile, side by side on sm+ */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Date + Time — side by side, both get equal width */}
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="block text-sm font-medium text-textMain mb-1.5">Date</label>
+              <label className="block text-xs font-medium text-textMuted mb-1">Date</label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => { setDate(e.target.value); setAvailability(null); }}
-                className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full border border-border rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-textMain mb-1.5">Start Time</label>
+              <label className="block text-xs font-medium text-textMuted mb-1">Start Time</label>
               <input
                 type="time"
                 value={startTime}
                 onChange={(e) => { setStartTime(e.target.value); setAvailability(null); }}
-                className="w-full border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full border border-border rounded-lg px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-textMain mb-1.5">Duration (hours)</label>
+            <label className="block text-xs font-medium text-textMuted mb-1">Duration (hours)</label>
             <div className="flex gap-2">
               {[1, 2, 3, 4].map((h) => (
                 <button
                   key={h}
                   type="button"
                   onClick={() => setDuration(h)}
-                  className={`flex-1 py-2 rounded-lg border-2 text-sm font-medium transition-colors min-h-[44px] ${
+                  className={`flex-1 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
                     duration === h
                       ? 'border-primary bg-primary text-white'
                       : 'border-border text-textMuted hover:border-primary/50'
@@ -168,36 +168,36 @@ const BookingModal = ({ onClose, onSave }) => {
           <button
             type="button"
             onClick={handleCheckAvailability}
-            className="w-full py-2.5 border border-primary text-primary text-sm rounded-lg hover:bg-primary/5 font-medium transition-colors min-h-[44px]"
+            className="w-full py-2.5 border border-primary text-primary text-sm rounded-lg hover:bg-primary/5 font-medium transition-colors"
           >
             Check Slot Availability
           </button>
 
           {availability !== null && (
             <div
-              className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium ${
+              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium ${
                 availability
                   ? 'bg-green-50 text-green-700 border border-green-200'
                   : 'bg-red-50 text-red-600 border border-red-200'
               }`}
             >
               <span>{availability ? '✓' : '✗'}</span>
-              <span>{availability ? 'Slot is available — ready to book' : 'Slot already booked'}</span>
+              <span>{availability ? 'Slot available — ready to book' : 'Slot already booked'}</span>
             </div>
           )}
 
-          <div className="flex gap-3 pt-1">
+          <div className="flex gap-2 pt-1">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 border border-border rounded-lg text-sm text-textMuted hover:bg-background transition-colors min-h-[44px]"
+              className="flex-1 py-2.5 border border-border rounded-lg text-sm text-textMuted hover:bg-background transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading || availability === false}
-              className="flex-1 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors min-h-[44px]"
+              className="flex-1 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors"
             >
               {loading ? 'Booking...' : 'Confirm Booking'}
             </button>
