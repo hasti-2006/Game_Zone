@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Pencil, Trash2, X, Check } from 'lucide-react';
+import { Plus, Pencil, Trash2, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../api/axios';
 import Topbar from '../components/Topbar';
@@ -39,7 +39,10 @@ const BeverageModal = ({ beverage, onClose, onSave }) => {
           <h3 className="font-semibold text-textMain">
             {beverage ? 'Edit Beverage' : 'Add Beverage'}
           </h3>
-          <button onClick={onClose} className="text-textMuted hover:text-textMain">
+          <button
+            onClick={onClose}
+            className="text-textMuted hover:text-textMain min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-background"
+          >
             <X size={20} />
           </button>
         </div>
@@ -78,14 +81,14 @@ const BeverageModal = ({ beverage, onClose, onSave }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 border border-border rounded-lg text-sm text-textMuted hover:bg-background"
+              className="flex-1 py-2.5 border border-border rounded-lg text-sm text-textMuted hover:bg-background min-h-[44px]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50"
+              className="flex-1 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 min-h-[44px]"
             >
               {loading ? 'Saving...' : 'Save'}
             </button>
@@ -95,6 +98,36 @@ const BeverageModal = ({ beverage, onClose, onSave }) => {
     </div>
   );
 };
+
+/* ── Mobile beverage card ── */
+const BeverageCard = ({ bev, index, onEdit, onDelete }) => (
+  <div className="bg-card rounded-xl border border-border p-4">
+    <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center gap-3 min-w-0">
+        <span className="text-xs text-textMuted w-5 shrink-0">{index + 1}</span>
+        <div className="min-w-0">
+          <p className="font-medium text-textMain truncate">{bev.name}</p>
+          <p className="text-xs text-textMuted mt-0.5">Qty: {bev.qty}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-1 shrink-0">
+        <span className="text-accent font-semibold text-sm mr-2">₹{bev.price}</span>
+        <button
+          onClick={() => onEdit(bev)}
+          className="p-2 text-textMuted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+        >
+          <Pencil size={15} />
+        </button>
+        <button
+          onClick={() => onDelete(bev._id)}
+          className="p-2 text-textMuted hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+        >
+          <Trash2 size={15} />
+        </button>
+      </div>
+    </div>
+  </div>
+);
 
 const Beverages = () => {
   const [beverages, setBeverages] = useState([]);
@@ -131,65 +164,88 @@ const Beverages = () => {
     }
   };
 
+  const handleEdit = (bev) => {
+    setEditBeverage(bev);
+    setShowModal(true);
+  };
+
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <Topbar title="Beverages">
         <button
           onClick={() => { setEditBeverage(null); setShowModal(true); }}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90"
+          className="flex items-center gap-2 px-3 md:px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 min-h-[44px]"
         >
-          <Plus size={16} /> Add Beverage
+          <Plus size={16} />
+          <span className="hidden sm:inline">Add Beverage</span>
         </button>
       </Topbar>
 
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-4 md:p-6 overflow-y-auto">
         {loading ? (
-          <p className="text-textMuted">Loading...</p>
+          <div className="flex items-center justify-center h-48">
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
         ) : beverages.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-textMuted">No beverages yet.</p>
           </div>
         ) : (
-          <div className="bg-card rounded-xl border border-border overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-background border-b border-border">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">#</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Name</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Price</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Qty</th>
-                  {/* <th className="text-left px-4 py-3 font-medium text-textMuted">Status</th> */}
-                  <th className="text-right px-4 py-3 font-medium text-textMuted">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {beverages.map((bev, i) => (
-                  <tr key={bev._id} className="hover:bg-background/50 transition-colors">
-                    <td className="px-4 py-3 text-textMuted">{i + 1}</td>
-                    <td className="px-4 py-3 font-medium text-textMain">{bev.name}</td>
-                    <td className="px-4 py-3 text-accent font-medium">₹{bev.price}</td>
-                    <td className="px-4 py-3 text-textMuted">{bev.qty}</td>
-                     <td className="px-4 py-3">
-                        <div className="flex items-center justify-end ">
-                        <button
-                          onClick={() => { setEditBeverage(bev); setShowModal(true); }}
-                          className="p-1.5 text-textMuted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
-                        >
-                          <Pencil size={14} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(bev._id)}
-                          className="p-1.5 text-textMuted hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div> 
-                    </td> 
+          <>
+            {/* Mobile: cards */}
+            <div className="flex flex-col gap-3 md:hidden">
+              {beverages.map((bev, i) => (
+                <BeverageCard
+                  key={bev._id}
+                  bev={bev}
+                  index={i}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+
+            {/* Desktop: table */}
+            <div className="hidden md:block bg-card rounded-xl border border-border overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-background border-b border-border">
+                  <tr>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">#</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Name</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Price</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Qty</th>
+                    <th className="text-right px-4 py-3 font-medium text-textMuted">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {beverages.map((bev, i) => (
+                    <tr key={bev._id} className="hover:bg-background/50 transition-colors">
+                      <td className="px-4 py-3 text-textMuted">{i + 1}</td>
+                      <td className="px-4 py-3 font-medium text-textMain">{bev.name}</td>
+                      <td className="px-4 py-3 text-accent font-medium">₹{bev.price}</td>
+                      <td className="px-4 py-3 text-textMuted">{bev.qty}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          <button
+                            onClick={() => handleEdit(bev)}
+                            className="p-1.5 text-textMuted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                          >
+                            <Pencil size={14} />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(bev._id)}
+                            className="p-1.5 text-textMuted hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
 

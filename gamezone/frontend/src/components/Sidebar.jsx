@@ -58,8 +58,8 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed md:static inset-y-0 left-0 z-50
-          w-64 min-h-screen bg-primary flex flex-col shrink-0
+          fixed md:sticky md:top-0 md:self-start inset-y-0 left-0 z-50
+          w-64 h-screen bg-primary flex flex-col shrink-0
           transform transition-transform duration-300 ease-in-out
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0

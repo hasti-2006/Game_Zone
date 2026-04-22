@@ -253,7 +253,7 @@ const Billing = () => {
                 {/* Adjust Final Price */}
                 <div>
                   <label className="block text-sm font-medium text-textMain mb-1.5">
-                    Adjust Final Price (override)
+                    Adjust Final Price
                   </label>
                   <input
                     type="number"
