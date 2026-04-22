@@ -13,3 +13,47 @@ body {
   background-color: #F5F7F6;
   color: #111827;
 }
+
+/* ── Mobile (up to 767px) ── */
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  /* No horizontal overflow on any page */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Full-width main content (sidebar is hidden/overlay on mobile) */
+  main {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  /* Comfortable page padding on mobile */
+  .page-content {
+    padding: 16px;
+  }
+
+  /* Minimum touch target for all interactive elements */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ── Tablet (768px – 1023px) ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+/* ── Laptop / Desktop (1024px and above) ── */
+@media (min-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+}
