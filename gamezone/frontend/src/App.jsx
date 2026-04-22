@@ -20,7 +20,9 @@ import UsersPage from './pages/Users';
 const AppLayout = () => (
   <div className="flex min-h-screen bg-background">
     <Sidebar />
-    <main className="flex-1 flex flex-col min-h-screen overflow-hidden">
+    {/* On mobile the sidebar is fixed/overlay, so main takes full width.
+        On md+ the sidebar is static so flex-1 naturally fills the rest. */}
+    <main className="flex-1 flex flex-col min-h-screen overflow-hidden w-full md:w-auto">
       <Outlet />
     </main>
   </div>

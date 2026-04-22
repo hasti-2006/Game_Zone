@@ -387,39 +387,41 @@ const Packages = () => {
       <Topbar title="Packages">
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2 border border-border text-textMain text-sm rounded-lg hover:bg-background transition-colors"
+          className="flex items-center gap-2 px-3 py-2 md:px-4 border border-border text-textMain text-sm rounded-lg hover:bg-background transition-colors min-h-[44px]"
         >
-          <Plus size={16} /> Add Package
+          <Plus size={16} />
+          <span className="hidden sm:inline">Add Package</span>
         </button>
         <button
           onClick={() => setShowAssignModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 font-medium"
+          className="flex items-center gap-2 px-3 py-2 md:px-4 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 font-medium min-h-[44px]"
         >
-          Assign to User
+          <span className="hidden sm:inline">Assign to User</span>
+          <span className="sm:hidden">Assign</span>
         </button>
       </Topbar>
 
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-4 md:p-6 overflow-y-auto">
         {/* Package Tiers */}
         {packages.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {packages.map((pkg, i) => (
               <div
                 key={pkg._id}
-                className={`rounded-2xl border p-5 ${tierColors[i % tierColors.length]} ${tierBorders[i % tierBorders.length]}`}
+                className={`rounded-2xl border p-4 md:p-5 ${tierColors[i % tierColors.length]} ${tierBorders[i % tierBorders.length]}`}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-xl bg-white/80 flex items-center justify-center">
+                <div className="flex items-start justify-between mb-3 gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-white/80 flex items-center justify-center shrink-0">
                       <Package size={16} className="text-primary" />
                     </div>
-                    <h3 className="font-bold text-textMain capitalize text-base">{pkg.name}</h3>
+                    <h3 className="font-bold text-textMain capitalize text-base truncate">{pkg.name}</h3>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 shrink-0">
                     <span className="text-accent font-bold text-xl">₹{pkg.price}</span>
                     <button
                       onClick={() => handleOpenEdit(pkg)}
-                      className="p-1.5 text-textMuted hover:text-primary hover:bg-white/60 rounded-lg transition-colors"
+                      className="p-1.5 text-textMuted hover:text-primary hover:bg-white/60 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                       title="Edit package"
                     >
                       <Pencil size={14} />
@@ -463,49 +465,52 @@ const Packages = () => {
           </div>
         ) : (
           <div className="bg-card rounded-xl border border-border overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-background border-b border-border">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">User</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Package</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Total Balance</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Remaining</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Date</th>
-                  <th className="text-left px-4 py-3 font-medium text-textMuted">Payment</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {purchases.map((p) => (
-                  <tr key={p._id} className="hover:bg-background/50 transition-colors">
-                    <td className="px-4 py-3">
-                      <p className="font-medium text-textMain">{p.userId?.name}</p>
-                      <p className="text-xs text-textMuted">{p.userId?.mobile}</p>
-                    </td>
-                    <td className="px-4 py-3 capitalize">
-                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
-                        {p.packageId?.name}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-textMuted">
-                      ₹{p.userId?.walletId?.totalBalance || 0}
-                    </td>
-                    <td className="px-4 py-3 font-semibold text-primary">
-                      ₹{p.userId?.walletId?.remainingBalance || 0}
-                    </td>
-                    <td className="px-4 py-3 text-textMuted text-xs">
-                      {new Date(p.purchasedAt).toLocaleDateString('en-IN', {
-                        day: '2-digit', month: 'short', year: 'numeric',
-                      })}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="text-xs capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                        {p.checkoutOption}
-                      </span>
-                    </td>
+            {/* Horizontal scroll wrapper for mobile */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm min-w-[560px]">
+                <thead className="bg-background border-b border-border">
+                  <tr>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">User</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Package</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Total Balance</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Remaining</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Date</th>
+                    <th className="text-left px-4 py-3 font-medium text-textMuted">Payment</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {purchases.map((p) => (
+                    <tr key={p._id} className="hover:bg-background/50 transition-colors">
+                      <td className="px-4 py-3">
+                        <p className="font-medium text-textMain">{p.userId?.name}</p>
+                        <p className="text-xs text-textMuted">{p.userId?.mobile}</p>
+                      </td>
+                      <td className="px-4 py-3 capitalize">
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                          {p.packageId?.name}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-textMuted">
+                        ₹{p.userId?.walletId?.totalBalance || 0}
+                      </td>
+                      <td className="px-4 py-3 font-semibold text-primary">
+                        ₹{p.userId?.walletId?.remainingBalance || 0}
+                      </td>
+                      <td className="px-4 py-3 text-textMuted text-xs">
+                        {new Date(p.purchasedAt).toLocaleDateString('en-IN', {
+                          day: '2-digit', month: 'short', year: 'numeric',
+                        })}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="text-xs capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                          {p.checkoutOption}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
