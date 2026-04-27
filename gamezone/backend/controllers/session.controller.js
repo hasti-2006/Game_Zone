@@ -244,7 +244,7 @@ const stopSession = async (req, res) => {
       referenceType: 'Session',
       mainSession: { startTime: session.startTime, endTime, totalMintues: mainMinutes, calculatedAmount: mainAmount },
       additionalRemotes: additionalRemotesBilling.map((r) => ({
-        startTime: r.startTime, endTime: r.endTime, totalMintues: r.totalMintues, calculatedAmount: r.calculatedAmount,
+        type: r.type, startTime: r.startTime, endTime: r.endTime, totalMintues: r.totalMintues, calculatedAmount: r.calculatedAmount,
       })),
       beverages: beveragesBilling.map((b) => ({
         beverageId: b.beverageId._id || b.beverageId, name: b.name, quantity: b.quantity, totalAmount: b.totalAmount,

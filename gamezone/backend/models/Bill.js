@@ -19,6 +19,7 @@ const billSchema = new mongoose.Schema(
     },
     additionalRemotes: [
       {
+        type: { type: String, enum: ['remote', 'extraUser'], default: 'remote' },
         startTime: Date,
         endTime: Date,
         totalMintues: Number,

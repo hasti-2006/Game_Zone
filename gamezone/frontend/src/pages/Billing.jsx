@@ -134,70 +134,74 @@ const Billing = () => {
             </div>
 
             {/* Additional Remotes (flat ₹30) */}
-            {bill.additionalRemotes?.filter((r) => r.type !== 'extraUser').length > 0 && (
-              <div className="bg-card rounded-xl border border-border p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Clock size={18} className="text-primary" />
-                  <h3 className="font-semibold text-textMain">Additional Remotes</h3>
-                  <span className="text-xs text-textMuted">(₹30 each)</span>
-                </div>
-                <div className="space-y-2">
-                  {bill.additionalRemotes
-                    .filter((r) => r.type !== 'extraUser')
-                    .map((r, i) => (
-                      <div key={i} className="flex justify-between text-sm">
-                        <span className="text-textMuted">Remote {i + 1}</span>
-                        <span className="font-medium text-textMain">₹{r.calculatedAmount?.toFixed(2)}</span>
-                      </div>
-                    ))}
-                  <div className="flex justify-between font-semibold text-textMain border-t border-border pt-2 mt-1">
-                    <span>Remotes Total</span>
-                    <span className="text-accent">
-                      ₹{bill.additionalRemotes
-                        .filter((r) => r.type !== 'extraUser')
-                        .reduce((s, r) => s + (r.calculatedAmount || 0), 0)
-                        .toFixed(2)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {(() => {
+              // A remote is: type === 'remote', OR type is missing but amount is exactly ₹30 (old bills before type was saved)
+              const remotes = bill.additionalRemotes?.filter(
+                (r) => r.type === 'remote' || (!r.type && r.calculatedAmount === 30)
+              ) || [];
+              // An extra user is: type === 'extraUser', OR type is missing but amount is NOT ₹30 (old bills)
+              const extraUsers = bill.additionalRemotes?.filter(
+                (r) => r.type === 'extraUser' || (!r.type && r.calculatedAmount !== 30)
+              ) || [];
 
-            {/* Extra Users (half session price, time-based) */}
-            {bill.additionalRemotes?.filter((r) => r.type === 'extraUser').length > 0 && (
-              <div className="bg-card rounded-xl border border-border p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Clock size={18} className="text-blue-500" />
-                  <h3 className="font-semibold text-textMain">Extra Users</h3>
-                  <span className="text-xs text-textMuted">(half session price/hr)</span>
-                </div>
-                <div className="space-y-2">
-                  {bill.additionalRemotes
-                    .filter((r) => r.type === 'extraUser')
-                    .map((r, i) => (
-                      <div key={i} className="text-sm border-b border-border pb-2 last:border-0 last:pb-0">
-                        <div className="flex justify-between text-textMuted">
-                          <span>User {i + 1}</span>
-                          <span>{formatMins(r.totalMintues)}</span>
-                        </div>
-                        <div className="flex justify-between font-medium text-textMain">
-                          <span></span>
-                          <span>₹{r.calculatedAmount?.toFixed(2)}</span>
+              return (
+                <>
+                  {remotes.length > 0 && (
+                    <div className="bg-card rounded-xl border border-border p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Clock size={18} className="text-primary" />
+                        <h3 className="font-semibold text-textMain">Additional Remotes</h3>
+                        <span className="text-xs text-textMuted">(₹30 each)</span>
+                      </div>
+                      <div className="space-y-2">
+                        {remotes.map((r, i) => (
+                          <div key={i} className="flex justify-between text-sm">
+                            <span className="text-textMuted">Remote {i + 1}</span>
+                            <span className="font-medium text-textMain">₹{r.calculatedAmount?.toFixed(2)}</span>
+                          </div>
+                        ))}
+                        <div className="flex justify-between font-semibold text-textMain border-t border-border pt-2 mt-1">
+                          <span>Remotes Total</span>
+                          <span className="text-accent">
+                            ₹{remotes.reduce((s, r) => s + (r.calculatedAmount || 0), 0).toFixed(2)}
+                          </span>
                         </div>
                       </div>
-                    ))}
-                  <div className="flex justify-between font-semibold text-textMain pt-1">
-                    <span>Extra Users Total</span>
-                    <span className="text-accent">
-                      ₹{bill.additionalRemotes
-                        .filter((r) => r.type === 'extraUser')
-                        .reduce((s, r) => s + (r.calculatedAmount || 0), 0)
-                        .toFixed(2)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+                    </div>
+                  )}
+
+                  {extraUsers.length > 0 && (
+                    <div className="bg-card rounded-xl border border-border p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Clock size={18} className="text-blue-500" />
+                        <h3 className="font-semibold text-textMain">Extra Users</h3>
+                        <span className="text-xs text-textMuted">(half session price/hr)</span>
+                      </div>
+                      <div className="space-y-2">
+                        {extraUsers.map((r, i) => (
+                          <div key={i} className="text-sm border-b border-border pb-2 last:border-0 last:pb-0">
+                            <div className="flex justify-between text-textMuted">
+                              <span>User {i + 1}</span>
+                              <span>{formatMins(r.totalMintues)}</span>
+                            </div>
+                            <div className="flex justify-between font-medium text-textMain">
+                              <span></span>
+                              <span>₹{r.calculatedAmount?.toFixed(2)}</span>
+                            </div>
+                          </div>
+                        ))}
+                        <div className="flex justify-between font-semibold text-textMain border-t border-border pt-2 mt-1">
+                          <span>Extra Users Total</span>
+                          <span className="text-accent">
+                            ₹{extraUsers.reduce((s, r) => s + (r.calculatedAmount || 0), 0).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
 
             {/* Beverages */}
             {bill.beverages?.length > 0 && (
