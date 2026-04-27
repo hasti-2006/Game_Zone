@@ -384,15 +384,6 @@ const UsersPage = () => {
 
   useEffect(() => {
     loadUsers();
-    const interval = setInterval(loadUsers, 10000);
-    const handleVisibility = () => {
-      if (document.visibilityState === 'visible') loadUsers();
-    };
-    document.addEventListener('visibilitychange', handleVisibility);
-    return () => {
-      clearInterval(interval);
-      document.removeEventListener('visibilitychange', handleVisibility);
-    };
   }, [loadUsers]);
 
   if (selectedUserId) {
