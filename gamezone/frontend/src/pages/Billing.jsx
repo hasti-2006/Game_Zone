@@ -173,7 +173,7 @@ const Billing = () => {
                   {extraUsers.length > 0 && (
                     <div className="bg-card rounded-xl border border-border p-5">
                       <div className="flex items-center gap-2 mb-3">
-                        <Clock size={18} className="text-blue-500" />
+                        <Clock size={18} className="text-accent-dark" />
                         <h3 className="font-semibold text-textMain">Extra Users</h3>
                         <span className="text-xs text-textMuted">(half session price/hr)</span>
                       </div>

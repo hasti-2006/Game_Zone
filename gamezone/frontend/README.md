@@ -150,14 +150,53 @@ gamezone/
 
 ## Color Theme
 
+The project uses an **Ocean Blue** premium color palette applied via Tailwind CSS custom tokens.
+
+### Palette
+
+| Token | Hex | Usage |
+|---|---|---|
+| `primary` | `#023859` | Deep Navy — main brand color, buttons, sidebar bg |
+| `primary-dark` | `#011C40` | Darkest Navy — hover states, footer, high contrast |
+| `accent` | `#54ACBF` | Medium Teal — CTA buttons, highlights, timers |
+| `accent-dark` | `#26658C` | Medium Blue — secondary actions, icons, links |
+| `light-aqua` | `#A7EBF2` | Light Aqua — sidebar text, badges, subtle tints |
+| `background` | `#F3F7FA` | Page background |
+| `card` | `#FFFFFF` | Card / panel background |
+| `border` | `#D9E4EC` | Card borders, dividers |
+| `textMain` | `#011C40` | Primary body text |
+| `textMuted` | `#26658C` | Subtext, muted labels |
+| `textHint` | `#54ACBF` | Placeholders, hints |
+
+### Component Color Rules
+
+- **Sidebar**: `bg-primary` with `text-light-aqua`, active nav item uses `bg-accent/20` with left border `border-accent`
+- **Primary buttons**: `bg-primary text-white hover:bg-primary-dark`
+- **Accent/CTA buttons**: `bg-accent text-white hover:bg-accent-dark`
+- **Cards**: `bg-card border-border shadow` with `border-radius: 10px`
+- **Table headers**: `bg-background` with `text-textMuted`
+- **Badges — info/neutral**: `bg-primary/10 text-accent-dark`
+- **Badges — success**: `bg-green-100 text-green-700` (unchanged)
+- **Badges — warning**: `bg-amber-50 text-amber-600` (unchanged)
+- **Badges — error**: `bg-red-100 text-red-600` (unchanged)
+- **Input focus ring**: `focus:ring-2 focus:ring-primary/30 focus:border-accent`
+- **Toast notifications**: `background: #023859`, `color: #A7EBF2`
+
 ```js
-primary: '#04594A'       // Deep teal green
-accent: '#BF9227'        // Golden mustard
-background: '#F5F7F6'    // Soft neutral
-card: '#FFFFFF'
-border: '#E5E7EB'
-textMain: '#111827'
-textMuted: '#6B7280'
+// tailwind.config.js
+colors: {
+  primary: '#023859',
+  'primary-dark': '#011C40',
+  accent: '#54ACBF',
+  'accent-dark': '#26658C',
+  'light-aqua': '#A7EBF2',
+  background: '#F3F7FA',
+  card: '#FFFFFF',
+  border: '#D9E4EC',
+  textMain: '#011C40',
+  textMuted: '#26658C',
+  textHint: '#54ACBF',
+}
 ```
 
 ## Key Features Explained

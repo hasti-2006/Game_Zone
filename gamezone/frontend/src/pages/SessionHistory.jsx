@@ -147,7 +147,7 @@ const SessionCard = ({ s, onView }) => {
           <span className="font-semibold text-primary text-sm">
             ₹{s.billDetails?.finalPrice?.toFixed(2)}
           </span>
-          <span className="capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+          <span className="capitalize bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full">
             {s.billDetails?.checkoutOption}
           </span>
         </div>
@@ -224,8 +224,8 @@ const SessionHistory = () => {
             </div>
           </div>
           <div className="bg-card rounded-xl border border-border p-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-              <Hash size={18} className="text-blue-500" />
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+              <Hash size={18} className="text-accent-dark" />
             </div>
             <div>
               <p className="text-xs text-textMuted">Sessions Today</p>
@@ -312,7 +312,7 @@ const SessionHistory = () => {
                             ₹{s.billDetails?.finalPrice?.toFixed(2)}
                           </td>
                           <td className="px-4 py-3">
-                            <span className="text-xs capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full whitespace-nowrap">
+                            <span className="text-xs capitalize bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full whitespace-nowrap">
                               {s.billDetails?.checkoutOption}
                             </span>
                           </td>

@@ -7,13 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#04594A',
-        accent: '#BF9227',
-        background: '#F5F7F6',
-        card: '#FFFFFF',
-        border: '#E5E7EB',
-        textMain: '#111827',
-        textMuted: '#6B7280',
+        primary: '#023859',        /* Deep Navy */
+        'primary-dark': '#011C40', /* Darkest Navy */
+        accent: '#54ACBF',         /* Medium Teal */
+        'accent-dark': '#26658C',  /* Medium Blue */
+        'light-aqua': '#A7EBF2',   /* Light Aqua */
+        background: '#F3F7FA',     /* Page background */
+        card: '#FFFFFF',           /* Card background */
+        border: '#D9E4EC',         /* Card border */
+        textMain: '#011C40',       /* Main body text */
+        textMuted: '#26658C',      /* Subtext, muted labels */
+        textHint: '#54ACBF',       /* Placeholder, hints */
       },
     },
   },

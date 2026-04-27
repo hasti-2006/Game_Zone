@@ -219,7 +219,7 @@ const BookingCard = ({ b, isActive, onStart, onCancel, statusColors }) => (
       {!isActive && (
         <span
           className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize shrink-0 ${
-            statusColors[b.status] || 'bg-gray-100 text-gray-500'
+            statusColors[b.status] || 'bg-primary/10 text-accent-dark'
           }`}
         >
           {b.status}
@@ -315,7 +315,7 @@ const Bookings = () => {
   const statusColors = {
     active: 'bg-green-100 text-green-700',
     cancelled: 'bg-red-100 text-red-600',
-    completed: 'bg-gray-100 text-gray-500',
+    completed: 'bg-primary/10 text-accent-dark',
   };
 
   const activeBookings = bookings.filter((b) => b.status === 'active');
@@ -340,8 +340,8 @@ const Bookings = () => {
           </div>
         ) : bookings.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-xl border border-border">
-            <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
-              <CalendarDays size={24} className="text-gray-400" />
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+              <CalendarDays size={24} className="text-accent-dark" />
             </div>
             <p className="font-medium text-textMain">No bookings yet</p>
             <p className="text-sm text-textMuted mt-1">Create a booking to reserve a system</p>
@@ -479,7 +479,7 @@ const Bookings = () => {
                             <td className="px-4 py-3">
                               <span
                                 className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize whitespace-nowrap ${
-                                  statusColors[b.status] || 'bg-gray-100 text-gray-500'
+                                  statusColors[b.status] || 'bg-primary/10 text-accent-dark'
                                 }`}
                               >
                                 {b.status}

@@ -97,12 +97,12 @@ const IdleCard = ({ system, onPlayGame, isBookedToday }) => (
   >
     <div className="flex items-start justify-between mb-4 gap-2">
       <div className="flex items-center gap-2 min-w-0">
-        <div className="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center shrink-0">
-          <Monitor size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
+        <div className="w-9 h-9 rounded-xl bg-background flex items-center justify-center shrink-0">
+          <Monitor size={18} className="text-textMuted group-hover:text-primary transition-colors" />
         </div>
         <div className="min-w-0">
           <p className="font-semibold text-textMain text-sm truncate">{system.name}</p>
-          <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-medium">
+          <span className="text-xs bg-primary/10 text-accent-dark px-1.5 py-0.5 rounded font-medium">
             {system.type}
           </span>
         </div>
@@ -178,7 +178,7 @@ const BookingsBell = ({ bookings }) => {
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize shrink-0 ${
                         b.status === 'active' ? 'bg-green-100 text-green-700'
                         : b.status === 'cancelled' ? 'bg-red-100 text-red-600'
-                        : 'bg-gray-100 text-gray-500'
+                        : 'bg-primary/10 text-accent-dark'
                       }`}>
                         {b.status}
                       </span>
@@ -213,7 +213,7 @@ const BookingsBell = ({ bookings }) => {
                       <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium capitalize ${
                         b.status === 'active' ? 'bg-green-100 text-green-700'
                         : b.status === 'cancelled' ? 'bg-red-100 text-red-600'
-                        : 'bg-gray-100 text-gray-500'
+                        : 'bg-primary/10 text-accent-dark'
                       }`}>
                         {b.status}
                       </span>
@@ -311,7 +311,7 @@ const Dashboard = () => {
           <span className="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-xs font-medium">
             {activeSystems.length} Active
           </span>
-          <span className="bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full text-xs font-medium">
+          <span className="bg-primary/10 text-accent-dark px-2.5 py-1 rounded-full text-xs font-medium">
             {idleSystems.length} Idle
           </span>
         </div>

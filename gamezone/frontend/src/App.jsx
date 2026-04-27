@@ -69,12 +69,12 @@ function App() {
               duration: 3000,
               style: {
                 borderRadius: '10px',
-                background: '#111827',
-                color: '#fff',
+                background: '#023859',
+                color: '#A7EBF2',
                 fontSize: '14px',
               },
               success: {
-                iconTheme: { primary: '#04594A', secondary: '#fff' },
+                iconTheme: { primary: '#54ACBF', secondary: '#fff' },
               },
             }}
           />

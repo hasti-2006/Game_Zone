@@ -37,9 +37,9 @@ const Sidebar = () => {
     // hidden on mobile — bottom nav handles navigation there
     <aside className="hidden md:sticky md:flex md:top-0 md:self-start md:flex-col md:shrink-0 w-64 h-screen bg-primary">
       {/* Logo */}
-      <div className="px-6 py-6 border-b border-white/10">
-        <h1 className="text-white text-2xl font-bold tracking-tight">GameZone</h1>
-        <p className="text-white/50 text-xs mt-0.5">Admin Panel</p>
+      <div className="px-6 py-6 border-b border-light-aqua/15">
+        <h1 className="text-light-aqua text-2xl font-bold tracking-tight">GameZone</h1>
+        <p className="text-light-aqua/50 text-xs mt-0.5">Admin Panel</p>
       </div>
 
       {/* Nav */}
@@ -51,8 +51,8 @@ const Sidebar = () => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors min-h-[44px] ${
                 isActive
-                  ? 'bg-white/20 text-white'
-                  : 'text-white/75 hover:bg-white/10 hover:text-white'
+                  ? 'bg-accent/20 text-light-aqua border-l-2 border-accent'
+                  : 'text-light-aqua/70 hover:bg-accent/15 hover:text-light-aqua'
               }`
             }
           >
@@ -63,16 +63,16 @@ const Sidebar = () => {
       </nav>
 
       {/* Admin info + logout */}
-      <div className="px-4 py-4 border-t border-white/10">
+      <div className="px-4 py-4 border-t border-light-aqua/15">
         <div className="flex items-center gap-3 mb-3">
           <div className="min-w-0">
-            <p className="text-white text-sm font-medium truncate">Admin</p>
-            <p className="text-white/50 text-xs">admin</p>
+            <p className="text-light-aqua text-sm font-medium truncate">Admin</p>
+            <p className="text-light-aqua/50 text-xs">admin</p>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 text-white/70 hover:text-white text-sm w-full px-2 py-1.5 rounded hover:bg-white/10 transition-colors min-h-[44px]"
+          className="flex items-center gap-2 text-light-aqua/70 hover:text-light-aqua text-sm w-full px-2 py-1.5 rounded hover:bg-accent/15 transition-colors min-h-[44px]"
         >
           <LogOut size={16} />
           Logout

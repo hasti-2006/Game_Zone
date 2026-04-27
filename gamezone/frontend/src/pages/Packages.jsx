@@ -87,7 +87,7 @@ const AssignModal = ({ packages, onClose, onSuccess }) => {
                 <div
                   key={s}
                   className={`h-1 rounded-full transition-all ${
-                    step >= s ? 'bg-primary w-8' : 'bg-gray-200 w-4'
+                    step >= s ? 'bg-primary w-8' : 'bg-border w-4'
                   }`}
                 />
               ))}
@@ -143,9 +143,9 @@ const AssignModal = ({ packages, onClose, onSuccess }) => {
               )}
 
               {userFound === false && (
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-                  <p className="text-blue-700 text-sm font-medium">New user</p>
-                  <p className="text-blue-600 text-xs mt-0.5">
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-3">
+                  <p className="text-accent-dark text-sm font-medium">New user</p>
+                  <p className="text-accent-dark/80 text-xs mt-0.5">
                     Account will be created automatically when package is assigned.
                   </p>
                 </div>
@@ -502,7 +502,7 @@ const Packages = () => {
                         })}
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-xs capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                        <span className="text-xs capitalize bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full">
                           {p.checkoutOption}
                         </span>
                       </td>

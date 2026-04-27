@@ -302,8 +302,8 @@ const SessionDetails = () => {
             <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                    <User size={15} className="text-blue-500" />
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <User size={15} className="text-accent-dark" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-textMain text-sm">Extra Users</h3>
@@ -312,7 +312,7 @@ const SessionDetails = () => {
                     </p>
                   </div>
                   {extraUsers.length > 0 && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-medium">
+                    <span className="text-xs bg-primary/10 text-accent-dark px-1.5 py-0.5 rounded-full font-medium">
                       {extraUsers.length}
                     </span>
                   )}
@@ -335,7 +335,7 @@ const SessionDetails = () => {
                     return (
                       <div
                         key={u._id}
-                        className="flex items-center justify-between rounded-xl px-3 py-2.5 bg-blue-50"
+                        className="flex items-center justify-between rounded-xl px-3 py-2.5 bg-primary/5"
                       >
                         <div>
                           <p className="text-xs font-medium text-textMain">User {i + 1}</p>
@@ -343,7 +343,7 @@ const SessionDetails = () => {
                             Added {new Date(u.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
-                        <span className="text-xs text-blue-600 font-semibold">~₹{est}</span>
+                        <span className="text-xs text-accent-dark font-semibold">~₹{est}</span>
                       </div>
                     );
                   })}
@@ -355,12 +355,12 @@ const SessionDetails = () => {
           {/* Beverages */}
           <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                <Coffee size={15} className="text-blue-500" />
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Coffee size={15} className="text-accent-dark" />
               </div>
               <h3 className="font-semibold text-textMain text-sm">Beverages</h3>
               {session.beverages.length > 0 && (
-                <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-primary/10 text-accent-dark px-1.5 py-0.5 rounded-full font-medium">
                   {session.beverages.length}
                 </span>
               )}

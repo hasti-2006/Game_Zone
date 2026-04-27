@@ -187,8 +187,8 @@ const UserHistoryPanel = ({ userId, user: userProp, onBack }) => {
 
         {sessions.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
-              <Clock size={20} className="text-gray-400" />
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+              <Clock size={20} className="text-accent-dark" />
             </div>
             <p className="text-textMuted">No sessions found for this user</p>
           </div>
@@ -228,7 +228,7 @@ const UserHistoryPanel = ({ userId, user: userProp, onBack }) => {
                         <span className="font-semibold text-primary text-sm">
                           ₹{s.billDetails?.finalPrice?.toFixed(2)}
                         </span>
-                        <span className="capitalize bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full">
+                        <span className="capitalize bg-primary/10 text-accent-dark px-1.5 py-0.5 rounded-full">
                           {s.billDetails?.checkoutOption || '—'}
                         </span>
                       </div>
@@ -276,7 +276,7 @@ const UserHistoryPanel = ({ userId, user: userProp, onBack }) => {
                             ₹{s.billDetails?.finalPrice?.toFixed(2)}
                           </td>
                           <td className="px-4 py-3">
-                            <span className="text-xs capitalize bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full whitespace-nowrap">
+                            <span className="text-xs capitalize bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full whitespace-nowrap">
                               {s.billDetails?.checkoutOption || '—'}
                             </span>
                           </td>
@@ -346,7 +346,7 @@ const UserCard = ({ user, index, onView }) => (
           )}
         </div>
       ) : (
-        <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-medium">
+        <span className="text-xs bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full font-medium">
           Inactive
         </span>
       )}
@@ -418,8 +418,8 @@ const UsersPage = () => {
           </div>
         ) : users.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
-              <Users size={24} className="text-gray-400" />
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+              <Users size={24} className="text-accent-dark" />
             </div>
             <p className="font-medium text-textMain">No users yet</p>
             <p className="text-sm text-textMuted mt-1">Users are created when sessions are started</p>
@@ -476,7 +476,7 @@ const UsersPage = () => {
                               )}
                             </div>
                           ) : (
-                            <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-medium">
+                            <span className="text-xs bg-primary/10 text-accent-dark px-2 py-0.5 rounded-full font-medium">
                               Inactive
                             </span>
                           )}
