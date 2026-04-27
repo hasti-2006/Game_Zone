@@ -177,71 +177,71 @@ const SessionDetails = () => {
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-background">
       {/* Header */}
-      <div className="bg-card border-b border-border px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div className="bg-card border-b border-border px-3 py-2.5 md:px-6 md:py-4 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
           <button
             onClick={() => navigate('/dashboard')}
-            className="p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors"
+            className="p-1.5 md:p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors shrink-0"
           >
             <ArrowLeft size={18} />
           </button>
-          <div>
-            <h2 className="text-lg font-semibold text-textMain">Session Details</h2>
-            <p className="text-xs text-textMuted">{sys?.name} — {sys?.type}</p>
+          <div className="min-w-0">
+            <h2 className="text-sm md:text-lg font-semibold text-textMain leading-tight">Session Details</h2>
+            <p className="text-[11px] md:text-xs text-textMuted truncate">{sys?.name} — {sys?.type}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 md:gap-3 shrink-0">
           <button
             onClick={fetchDetails}
-            className="p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors"
+            className="p-1.5 md:p-2 text-textMuted hover:text-textMain hover:bg-background rounded-lg transition-colors"
           >
-            <RefreshCw size={16} />
+            <RefreshCw size={15} />
           </button>
           <button
             onClick={handleStopSession}
             disabled={stopping}
-            className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors disabled:opacity-60 font-medium"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 bg-red-500 text-white text-xs md:text-sm rounded-lg hover:bg-red-600 transition-colors disabled:opacity-60 font-medium whitespace-nowrap"
           >
-            <StopCircle size={16} />
-            {stopping ? 'Stopping...' : 'Stop Session'}
+            <StopCircle size={14} />
+            {stopping ? 'Stopping…' : 'Stop'}
           </button>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-4xl mx-auto space-y-5">
+      <div className="flex-1 overflow-y-auto p-3 md:p-6 pb-20 md:pb-6">
+        <div className="max-w-4xl mx-auto space-y-3 md:space-y-5">
 
           {/* User + Timer hero card */}
-          <div className="bg-card rounded-2xl border border-border p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <User size={22} className="text-primary" />
+          <div className="bg-card rounded-2xl border border-border p-4 md:p-6">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <User size={20} className="text-primary" />
                 </div>
-                <div>
-                  <p className="text-lg font-semibold text-textMain">
+                <div className="min-w-0">
+                  <p className="text-sm md:text-lg font-semibold text-textMain truncate">
                     {session.userId?.name || 'Guest'}
                   </p>
                   {session.userId?.mobile && (
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <Smartphone size={13} className="text-textMuted" />
-                      <span className="text-sm text-textMuted">{session.userId.mobile}</span>
+                      <Smartphone size={12} className="text-textMuted shrink-0" />
+                      <span className="text-xs text-textMuted">{session.userId.mobile}</span>
                     </div>
                   )}
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <Clock size={13} className="text-textMuted" />
-                    <span className="text-xs text-textMuted">
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <Clock size={12} className="text-textMuted shrink-0" />
+                    <span className="text-[11px] text-textMuted">
                       Started {new Date(session.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="flex items-center gap-2 justify-end text-accent font-mono font-bold text-2xl">
-                  <Clock size={20} />
+              <div className="text-right shrink-0">
+                <div className="flex items-center gap-1.5 justify-end text-accent font-mono font-bold text-lg md:text-2xl">
+                  <Clock size={16} className="md:w-5 md:h-5" />
                   {timer}
                 </div>
-                <p className="text-sm text-textMuted mt-1">
+                <p className="text-xs text-textMuted mt-0.5">
                   Est. <span className="font-semibold text-textMain">₹{totalEst}</span>
                 </p>
               </div>
@@ -249,10 +249,10 @@ const SessionDetails = () => {
           </div>
 
           {/* Remotes + Extra Users row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-5">
 
             {/* Additional Remotes — flat ₹30 each */}
-            <div className="bg-card rounded-2xl border border-border p-5">
+            <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
@@ -299,7 +299,7 @@ const SessionDetails = () => {
             </div>
 
             {/* Extra Users — half session price, time-based */}
-            <div className="bg-card rounded-2xl border border-border p-5">
+            <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
@@ -353,7 +353,7 @@ const SessionDetails = () => {
           </div>
 
           {/* Beverages */}
-          <div className="bg-card rounded-2xl border border-border p-5">
+          <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
                 <Coffee size={15} className="text-blue-500" />
@@ -418,28 +418,28 @@ const SessionDetails = () => {
           </div>
 
           {/* Live Bill Estimate */}
-          <div className="bg-card rounded-2xl border border-border p-5">
-            <h3 className="font-semibold text-textMain text-sm mb-4">Live Bill Estimate</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-              <div className="bg-background rounded-xl p-3 text-center">
-                <p className="text-xs text-textMuted mb-1">Session</p>
-                <p className="font-bold text-textMain">₹{mainEst.toFixed(2)}</p>
+          <div className="bg-card rounded-2xl border border-border p-4 md:p-5">
+            <h3 className="font-semibold text-textMain text-sm mb-3">Live Bill Estimate</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 md:gap-3">
+              <div className="bg-background rounded-xl p-2.5 md:p-3 text-center">
+                <p className="text-[10px] md:text-xs text-textMuted mb-1">Session</p>
+                <p className="font-bold text-textMain text-xs md:text-sm">₹{mainEst.toFixed(2)}</p>
               </div>
-              <div className="bg-background rounded-xl p-3 text-center">
-                <p className="text-xs text-textMuted mb-1">Remotes</p>
-                <p className="font-bold text-textMain">₹{remotesEst.toFixed(2)}</p>
+              <div className="bg-background rounded-xl p-2.5 md:p-3 text-center">
+                <p className="text-[10px] md:text-xs text-textMuted mb-1">Remotes</p>
+                <p className="font-bold text-textMain text-xs md:text-sm">₹{remotesEst.toFixed(2)}</p>
               </div>
-              <div className="bg-background rounded-xl p-3 text-center">
-                <p className="text-xs text-textMuted mb-1">Extra Users</p>
-                <p className="font-bold text-textMain">₹{extraUsersEst.toFixed(2)}</p>
+              <div className="bg-background rounded-xl p-2.5 md:p-3 text-center">
+                <p className="text-[10px] md:text-xs text-textMuted mb-1">Extra Users</p>
+                <p className="font-bold text-textMain text-xs md:text-sm">₹{extraUsersEst.toFixed(2)}</p>
               </div>
-              <div className="bg-background rounded-xl p-3 text-center">
-                <p className="text-xs text-textMuted mb-1">Beverages</p>
-                <p className="font-bold text-textMain">₹{bevEst.toFixed(2)}</p>
+              <div className="bg-background rounded-xl p-2.5 md:p-3 text-center">
+                <p className="text-[10px] md:text-xs text-textMuted mb-1">Beverages</p>
+                <p className="font-bold text-textMain text-xs md:text-sm">₹{bevEst.toFixed(2)}</p>
               </div>
-              <div className="bg-primary/5 border border-primary/20 rounded-xl p-3 text-center">
-                <p className="text-xs text-primary mb-1 font-medium">Total Est.</p>
-                <p className="font-bold text-primary text-lg">₹{totalEst.toFixed(2)}</p>
+              <div className="col-span-2 sm:col-span-1 bg-primary/5 border border-primary/20 rounded-xl p-2.5 md:p-3 text-center">
+                <p className="text-[10px] md:text-xs text-primary mb-1 font-medium">Total Est.</p>
+                <p className="font-bold text-primary text-base md:text-lg">₹{totalEst.toFixed(2)}</p>
               </div>
             </div>
           </div>
